@@ -1,28 +1,23 @@
-
-
 def read_file():
     f = open("data.txt", "r")
 
     elves = []
     current_elve = 0
 
-    for i, line in enumerate(f):
+    for line in f:
         if line == '\n':
             elves.append(current_elve)
             current_elve = 0
             continue
-
         current_elve += int(line)
 
+    elves.append(current_elve)
     return elves
 
 def run_take(num):
     elves = read_file()
-    sorted_elves = sorted(elves)
-    res = 0
-    for i in range(num):
-        res += sorted_elves.pop()
-    return res
+    sorted_elves = sorted(elves, reverse=True)
+    return sum(sorted_elves[:num])
 
 def run_1():
     return run_take(1)
